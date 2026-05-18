@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.coverage
+.tox/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.ruff_cache/
+
+# Environment & secrets
+.env
+.env.bak
+.env.local
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data & models (released separately — see RELEASE.md)
+data/raw/
+data/processed/
+data/feedback/
+models/
+logs/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.fdb_latexmk
+*.fls
+
+# Editor
+.vscode/settings.json
+.idea/
+notebooks/.ipynb_checkpoints/
+
+# Large outputs
+*.npy
+*.npz
+*.pt
+*.bin
+*.safetensors
+embeddings_cache/
+
+# Overleaf bundles (rebuild from source)
+paper/build_v2/reviewagent_*_overleaf*
+paper/build_v2/fig1_architecture_original.png
+paper/IssueSpec/main.pdf
