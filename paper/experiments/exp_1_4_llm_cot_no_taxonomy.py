@@ -21,7 +21,7 @@ Output:
 
 Run:
     export ANTHROPIC_API_KEY=sk-ant-...
-    cd <HOME>/Desktop/Review\\ Agent/ReviewAgent
+    cd ~/Desktop/Review\\ Agent/ReviewAgent
     python paper/experiments/exp_1_4_llm_cot_no_taxonomy.py
 
 Expected runtime: ~5-8 minutes for the 60 bug+feature clusters at
@@ -40,7 +40,7 @@ import json
 import os
 from pathlib import Path
 
-REPO_ROOT = Path("<PROJECT_ROOT>")
+REPO_ROOT = Path(".")
 INPUT = REPO_ROOT / "data/processed/issue_specs/sample_100_clusters.json"
 OUTPUT = REPO_ROOT / "data/processed/issue_specs/specs_llm_cot_no_taxonomy.json"
 

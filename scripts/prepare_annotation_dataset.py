@@ -13,7 +13,7 @@ Usage:
     python3 scripts/prepare_annotation_dataset.py
 
 Output:
-    <HOME>/Desktop/Review Agent/
+    ~/Desktop/Review Agent/
         RRGen_Full_Annotator_Review.xlsx     - Excel for annotators
         RRGen_Full_Dataset.csv               - Full 215K CSV
 """
@@ -233,7 +233,7 @@ def main():
     random.seed(args.seed)
     np.random.seed(args.seed)
 
-    output_dir = Path("<HOME>/Desktop/Review Agent")
+    output_dir = Path("~/Desktop/Review Agent")
 
     # Load data
     print("Loading labeled data...")

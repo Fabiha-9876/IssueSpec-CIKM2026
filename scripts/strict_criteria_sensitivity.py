@@ -16,7 +16,7 @@ from copy import deepcopy
 
 import numpy as np
 
-BASE = Path("<PROJECT_ROOT>/data/processed/issue_specs")
+BASE = Path("./data/processed/issue_specs")
 
 # Default §3.8.1.x criteria
 DEFAULT = {

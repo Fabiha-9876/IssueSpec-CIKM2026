@@ -8,8 +8,8 @@ import json
 import re
 from pathlib import Path
 
-INPUT = Path("<PROJECT_ROOT>/data/processed/responses/sample_100_reviews_with_rag.json")
-OUTPUT = Path("<PROJECT_ROOT>/data/processed/responses/responses_prompt_baseline.json")
+INPUT = Path("./data/processed/responses/sample_100_reviews_with_rag.json")
+OUTPUT = Path("./data/processed/responses/responses_prompt_baseline.json")
 
 # ---------------------------------------------------------------------------
 # Lightweight keyword extraction so responses stay specific to each review.

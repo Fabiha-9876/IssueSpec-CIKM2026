@@ -13,7 +13,7 @@ from pathlib import Path
 
 import torch
 
-BASE = Path("<PROJECT_ROOT>")
+BASE = Path(".")
 sys.path.insert(0, str(BASE))
 
 # Load existing single-shot responses

@@ -22,11 +22,11 @@ import re
 from pathlib import Path
 
 INPUT_PATH = Path(
-    "<PROJECT_ROOT>/"
+    "./"
     "data/processed/responses/sample_100_reviews_with_rag.json"
 )
 OUTPUT_PATH = Path(
-    "<PROJECT_ROOT>/"
+    "./"
     "data/processed/responses/responses_reviewagent_full.json"
 )
 

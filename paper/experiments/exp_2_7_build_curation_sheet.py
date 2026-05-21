@@ -8,7 +8,7 @@ once you have the returned CSV) computes Cohen's κ between the two
 raters' KEEP/RENAME/MERGE/SPLIT labels.
 
 Run:
-    cd <HOME>/Desktop/Review\\ Agent/ReviewAgent
+    cd ~/Desktop/Review\\ Agent/ReviewAgent
     python paper/experiments/exp_2_7_build_curation_sheet.py
 """
 
@@ -20,7 +20,7 @@ from pathlib import Path
 
 import numpy as np
 
-REPO_ROOT = Path("<PROJECT_ROOT>")
+REPO_ROOT = Path(".")
 INPUT = REPO_ROOT / "data/processed/issue_specs/sample_100_clusters.json"
 OUTPUT = REPO_ROOT / "paper/experiments/curation_sheet_20clusters.csv"
 

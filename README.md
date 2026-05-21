@@ -1,116 +1,53 @@
-# IssueSpec — A Framework for Structured Review-to-Issue Translation
+# IssueSpec — Reproduction Data Bundle
 
-Anonymous code release for CIKM 2026 submission.
+Data artifacts for the CIKM 2026 paper *IssueSpec: A Framework for Structured
+Review-to-Issue Translation*. Pair this bundle with the code repository to
+reproduce every numerical claim in the paper.
 
-IssueSpec is a five-stage pipeline that converts noisy app-store reviews into
-typed, developer-routable issue specifications via knowledge-graph clustering,
-LLM-based template-filled IR generation, and CMDP-grounded RLHF response alignment.
-
-## Repository layout
+## Contents
 
 ```
-.
-├── paper/                  LaTeX source + figures for the submitted paper
-│   ├── IssueSpec/          Final paper (main.tex + figs + acmart class)
-│   ├── build_v2/           Figure-generation Python scripts + PNGs
-│   └── experiments/        Pre-submission experiment scripts + curation rubric
-├── scripts/                Pipeline scripts (Stage 1-5, ablations, scorers)
-│   ├── speccov.py          Standalone SpecCov faithfulness scorer
-│   ├── compute_3rater_krippendorff.py
-│   ├── audit_hierarchical_cluster_purity_llm.py
-│   ├── run_rlhf_head_to_head.py
-│   └── ... (~80 scripts)
-├── src/                    Core library modules (taxonomies, schema, utils)
-├── api/                    Optional API wrappers
-├── configs/                YAML configuration files
-├── notebooks/              Exploratory Jupyter notebooks
-├── annotator_materials/    Templates for human-in-the-loop annotation
-├── human_work/             Lead-author rating spreadsheets (anonymized)
-├── tests/                  Unit tests
-├── figures/                Final figures used in the paper
-├── verify_paper_results.py Reproduce every numerical claim in the paper
-├── verify_paper_results.ipynb  Notebook version
-├── ANNOTATION_PROTOCOL.md  Detailed annotation rubric
-├── IMPLEMENTATION_GUIDE.md How to run the full pipeline end-to-end
-├── Dockerfile              Pinned-environment reproducibility
-└── pyproject.toml          Python dependencies
+data/processed/
+├── verified_annotations.json                 5,230-review verified anchor (lead-author labels)
+├── rrgen_v5_training.json                     215,883-record V5 training set (with provenance)
+├── issue_specs/
+│   ├── sample_100_clusters.json              100-cluster Stage-3 benchmark
+│   ├── specs_with_taxonomy.json              LLM-with-taxonomy IssueSpecs
+│   ├── specs_free_form.json                  free-form baseline specs
+│   ├── specs_raw_summary.json                raw-concatenation lower bound
+│   └── specs_human_written.json              lead-author reference specs
+├── responses/                                 Stage-4 RAG responses (4 conditions)
+├── expert_evaluation/strict_holdout_kappa.json   490-gold κ progression + 307 held-out
+├── experiments/
+│   ├── exp2_human_eval.json                   Stage-4 human eval (400 ratings, 4 conditions)
+│   └── ablation_a5_results.json              A5 no-RAG ablation
+├── ablations/
+│   ├── agentic_vs_vanilla_rag.json           agentic-RAG feasibility study (n=10)
+│   └── a1b_repbased.json                      count-controlled cluster ablation
+├── rlhf/head_to_head/metrics.json            Stage-5 5-policy head-to-head
+├── clusters_umap/
+│   ├── quality_metrics_flat_vs_hierarchical.json   cluster quality (Table 11)
+│   └── quality_metrics_summary.txt
+└── inter_annotator/agreement_summary.json    99-review 3-rater Krippendorff α
 ```
 
-## Quick start
+## How to use
 
-```bash
-# 1. Install dependencies
-pip install -e .
+1. Clone the code repository: `git clone https://github.com/<ANON>/ReviewAgent`
+2. Extract this bundle into the repo root so paths resolve as `data/processed/...`
+3. Verify every paper number:
+   ```bash
+   python3 verify_paper_results.py
+   ```
 
-# 2. Download released data + model bundle (see RELEASE.md)
-#    Then place under data/processed/ and models/
+No GPU or API keys are needed for verification — every headline number is
+recomputed from these saved files.
 
-# 3. Verify all paper numbers
-python3 verify_paper_results.py
+## Models
 
-# Or run individual segments:
-python3 verify_paper_results.py 5   # Stage 3 SpecCov scorer only
-python3 verify_paper_results.py 9   # Stage 5 RLHF policies only
-```
-
-## Reproducing each paper claim
-
-The script `verify_paper_results.py` re-runs the computation behind each headline
-result and prints the value alongside the paper claim. Ten segments cover:
-
-| # | Segment | Verifies |
-|---|---|---|
-| 1 | Corpus + provenance | 215,583 working corpus, 5,230 anchor, 79.49/18.08/2.43% |
-| 2 | Stage 1 κ progression | Table 8: V2 0.163, cleanlab 0.333, V5 0.592 |
-| 3 | Stage 2 cluster quality | Table 11: DB, CH, 5.4× and 1.9× ratios |
-| 4 | A1b ablation | §5.5 count-matched flat-605 vs KG-605 |
-| 5 | SpecCov scorer | §4.4 4.16/3.33/5.00/4.00 |
-| 6 | Stage 4 human eval | Table 10: 2.31/2.98/2.26/4.62; +2.36 Δ |
-| 7 | A5 no-RAG ablation | §5.5 ΔBLEU/ROUGE/BERTScore |
-| 8 | Agentic vs vanilla | §5.2 0.58→0.70, 0%→60% citations |
-| 9 | Stage 5 RLHF | §5.3 5 policies + +52% BLEU-1 gain |
-| 10 | Inter-rater α | Table 4: α=0.451 (99 reviews) |
-
-## Released artifacts (downloaded separately)
-
-To respect repo size limits, the following are released as a separate bundle:
-
-- **V1-V5 classifier checkpoints** + cleanlab correction procedure
-- **5,230-review verified anchor** and 490-review classification gold
-- **400-row blinded evaluation** and count-controlled A1b output
-- **CMDP-RLHF testbed** (KTO, DPO, constrained-proxy, and Lagrangian Constrained PPO trainers)
-- **100-cluster benchmark** with 99-review three-rater α=0.451 subsample
-- Pinned-environment Docker image (single-command build on any CUDA 12.x host)
-
-See `RELEASE.md` for download instructions (link redacted for anonymous review).
-
-## SpecCov standalone scorer
-
-The `scripts/speccov.py` module is the released SpecCov extractive-coverage
-faithfulness scorer. Usage:
-
-```bash
-# Pure SpecCov (default)
-python3 scripts/speccov.py \
-    --specs path/to/specs.json \
-    --clusters path/to/clusters.json \
-    --out path/to/scores.json
-
-# Paper-reproduction mode (applies per-condition floor from §4.4)
-python3 scripts/speccov.py \
-    --specs path/to/raw_summary_specs.json \
-    --clusters path/to/clusters.json \
-    --condition raw_summary \
-    --out path/to/scores.json
-```
+Classifier checkpoints (V1–V5 RoBERTa) are released separately on Hugging Face;
+see the code repository's `SETUP_GUIDE.md` §4.4.
 
 ## License
 
-MIT License — see [LICENSE](LICENSE).
-
-## Anonymous review
-
-Author identities and institutional affiliations are withheld in compliance with
-the CIKM 2026 double-blind review policy. Personal paths and identifiers have
-been replaced with `<HOME>`, `<PROJECT_ROOT>`, and `ANONYMOUS` placeholders
-throughout the codebase.
+CC BY 4.0. If you use this data, please cite the CIKM 2026 paper.

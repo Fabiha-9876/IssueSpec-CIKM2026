@@ -23,7 +23,7 @@ from pathlib import Path
 
 import numpy as np
 
-BASE = Path("<PROJECT_ROOT>")
+BASE = Path(".")
 sys.path.insert(0, str(BASE))
 from src.stage5.feedback_propagator import FeedbackPropagator
 

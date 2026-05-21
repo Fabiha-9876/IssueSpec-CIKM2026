@@ -13,7 +13,7 @@ from pathlib import Path
 
 import networkx as nx
 
-BASE = Path("<PROJECT_ROOT>")
+BASE = Path(".")
 sys.path.insert(0, str(BASE))
 from src.common.schemas import ReviewObject, AspectSentiment, ExtractedEntities
 from src.stage2.kg_builder import ReviewKnowledgeGraph

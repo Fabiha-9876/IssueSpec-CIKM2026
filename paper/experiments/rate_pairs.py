@@ -10,7 +10,7 @@ and collects:
 Saves progress after every rating so you can quit and resume with `python rate_pairs.py`.
 
 Run:
-    cd <HOME>/Desktop/Review\\ Agent/ReviewAgent
+    cd ~/Desktop/Review\\ Agent/ReviewAgent
     python paper/experiments/rate_pairs.py
 
 Estimated time: 30-60 min for 100 pairs (~20-30 sec each).
@@ -22,7 +22,7 @@ import json
 import random
 from pathlib import Path
 
-REPO = Path("<PROJECT_ROOT>")
+REPO = Path(".")
 NO_SPEC = REPO / "data/processed/responses/responses_reviewagent_no_spec_LLM.json"
 WITH_SPEC = REPO / "data/processed/responses/responses_reviewagent_full_LLM.json"
 OUT = REPO / "data/processed/responses/pairwise_ratings_human.json"

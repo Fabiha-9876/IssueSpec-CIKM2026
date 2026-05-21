@@ -46,9 +46,9 @@ def normalize(label: str | None) -> str | None:
 
 
 SOURCES = [
-    "<HOME>/Desktop/Review Agent/RRGen_Annotation/compatibility.numbers",
-    "<HOME>/Desktop/Review Agent/RRGen_Annotation/performance.numbers",
-    "<HOME>/Desktop/Review Agent/RRGen_Annotation/praise.numbers",
+    "~/Desktop/Review Agent/RRGen_Annotation/compatibility.numbers",
+    "~/Desktop/Review Agent/RRGen_Annotation/performance.numbers",
+    "~/Desktop/Review Agent/RRGen_Annotation/praise.numbers",
 ]
 
 

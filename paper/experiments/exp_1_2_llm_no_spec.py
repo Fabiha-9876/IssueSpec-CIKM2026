@@ -20,7 +20,7 @@ is the clean estimate of IssueSpec contribution alone.
 
 Run:
     export ANTHROPIC_API_KEY=sk-ant-...
-    cd <HOME>/Desktop/Review\\ Agent/ReviewAgent
+    cd ~/Desktop/Review\\ Agent/ReviewAgent
     python paper/experiments/exp_1_2_llm_no_spec.py
 
 Expected runtime: ~3-5 minutes for 100 reviews at ~2s per call.
@@ -34,7 +34,7 @@ import json
 import os
 from pathlib import Path
 
-REPO_ROOT = Path("<PROJECT_ROOT>")
+REPO_ROOT = Path(".")
 INPUT = REPO_ROOT / "data/processed/responses/sample_100_reviews_with_rag.json"
 OUTPUT = REPO_ROOT / "data/processed/responses/responses_reviewagent_no_spec_LLM.json"
 

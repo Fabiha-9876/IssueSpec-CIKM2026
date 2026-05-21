@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 
 ACTIONABLE = {"bug_report", "feature_request", "performance", "usability", "compatibility"}
-BASE = Path("<PROJECT_ROOT>")
+BASE = Path(".")
 INP = BASE / "data/processed/rrgen_v5_relabeled/rrgen_v5_relabeled.json"
 OUT_EMB = BASE / "data/processed/embeddings_cache.npy"
 OUT_IDX = BASE / "data/processed/embeddings_cache_index.json"

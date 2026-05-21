@@ -22,7 +22,7 @@ all have active issue trackers with bug/feature labels):
     - "tachiyomiorg/tachiyomi" (manga reader)
 
 Run:
-    cd <HOME>/Desktop/Review\\ Agent/ReviewAgent
+    cd ~/Desktop/Review\\ Agent/ReviewAgent
     python paper/experiments/exp_2_6_mine_4th_repo.py osmandapp/OsmAnd
 
 Optional second arg = how many issues to over-fetch (default 100).
@@ -37,7 +37,7 @@ import os
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path("<PROJECT_ROOT>")
+REPO_ROOT = Path(".")
 sys.path.insert(0, str(REPO_ROOT))
 
 # Reuse the existing mining helpers so the schema is identical.

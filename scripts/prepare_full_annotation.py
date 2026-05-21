@@ -8,7 +8,7 @@ with Y/N columns for annotators.
 Excel is too slow for 215K rows, so we use CSV + a small Excel summary.
 
 Output:
-    <HOME>/Desktop/Review Agent/RRGen_Annotation/
+    ~/Desktop/Review Agent/RRGen_Annotation/
         bug_report.csv          (80,056 reviews)
         feature_request.csv     (26,286 reviews)
         performance.csv         (182 reviews)
@@ -38,7 +38,7 @@ except ImportError:
 
 
 def main():
-    output_dir = Path("<HOME>/Desktop/Review Agent/RRGen_Annotation")
+    output_dir = Path("~/Desktop/Review Agent/RRGen_Annotation")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Load data

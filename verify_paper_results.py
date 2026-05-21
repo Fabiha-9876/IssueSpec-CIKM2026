@@ -3,7 +3,7 @@
 Verify all IssueSpec paper results — no Jupyter needed.
 
 Run from VS Code terminal:
-    cd "<PROJECT_ROOT>"
+    cd <repo-root>
     python3 verify_paper_results.py
 
 Or run individual segments:
@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 from collections import Counter
 
-BASE = Path("<PROJECT_ROOT>")
+BASE = Path(__file__).resolve().parent
 DP = BASE / "data" / "processed"
 sys.path.insert(0, str(BASE / "scripts"))
 
