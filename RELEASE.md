@@ -1,9 +1,15 @@
 # Released Data + Model Artifacts
 
-The code in this repository is small (~8 MB). The following artifacts are too
-large for the code repo and are released as a separate bundle:
+The code in this repository is small (~15 MB). Data and models are released
+separately, in two tiers:
 
-## Bundle contents (~30 GB total)
+- **Verification bundle (10 MB, Zenodo):** everything `verify_paper_results.py`
+  needs to reproduce every number in the paper. No GPU, no API keys. See
+  *Download → step 1* below.
+- **Full re-training set (~30 GB):** raw RRGen data + all V1–V5 model
+  checkpoints, for re-running the pipeline from scratch (optional).
+
+## Full re-training set contents (~30 GB total)
 
 ### Models (~21 GB)
 - `models/stage1_classifier/`     V1 RoBERTa classifier (baseline)
@@ -32,23 +38,44 @@ Pinned-environment Docker image (single-command build on any CUDA 12.x host).
 
 ## Download
 
-**Anonymous review link:** `<REDACTED>` (will be filled in for camera-ready)
+### 1. Data bundle (verification — 10 MB, no GPU/API needed)
 
-After download:
+All processed artifacts needed to reproduce every numerical claim are released
+on Zenodo:
+
+- **Zenodo DOI:** [10.5281/zenodo.20320410](https://doi.org/10.5281/zenodo.20320410)
+  (`issuespec-data-bundle.tar.gz`, ~10 MB)
+
 ```bash
-tar -xzf issuespec_release_bundle.tar.gz
-mv data/ models/ <PROJECT_ROOT>/
+# from the repository root
+tar -xzf issuespec-data-bundle.tar.gz   # creates ./data/processed/
+python3 verify_paper_results.py          # verifies every paper number
 ```
+
+### 2. Raw RRGen dataset (full pipeline re-run)
+
+The raw 310,031 review-response pairs come from the public RRGen corpus
+(Gao et al., *Automating App Review Response Generation*, ASE 2019). Download
+the dataset from the original authors and place the CSV at `data/raw/`.
+
+### 3. Model checkpoints (Stage-1 inference)
+
+The V5 production classifier (κ = 0.592) is the only checkpoint needed to
+reproduce the Stage-1 results. It is hosted on the Hugging Face Hub; the
+anonymized handle is recorded in the Zenodo deposit's metadata to preserve
+double-blind review. Verification (step 1) does **not** require any model —
+all Stage-1 numbers are recomputed from the saved evaluation files in the
+data bundle.
 
 ## Re-verifying paper claims (no GPU needed)
 
-Once `data/processed/` is in place, run:
+Once `data/processed/` is in place (step 1 above), run:
 ```bash
 python3 verify_paper_results.py
 ```
 
 This re-runs the computation behind every numerical claim in the paper using
-only the saved data files (no model inference required).
+only the saved data files — no model inference, no GPU, no API keys.
 
 ## Re-training (GPU required)
 
