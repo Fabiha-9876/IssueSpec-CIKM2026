@@ -48,6 +48,10 @@ recomputed from these saved files.
 Classifier checkpoints (V1–V5 RoBERTa) are released separately on Hugging Face;
 see the code repository's `SETUP_GUIDE.md` §4.4.
 
-## License
+## Data provenance
 
-CC BY 4.0. If you use this data, please cite the CIKM 2026 paper.
+The review text in this bundle comes from the RRGen corpus (Gao et al.,
+"Automating App Review Response Generation", ASE 2019); refer to the original
+authors' terms for its use. The other files are derived artifacts (labels,
+IssueSpecs, results, metrics) shared to support review of the accompanying
+paper, which is under review at CIKM 2026 and not yet published.
